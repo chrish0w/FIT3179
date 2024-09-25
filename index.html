@@ -22,7 +22,7 @@
       },
       "title": "Generalized Cost of Living Index Across Australian States",
       "data": {
-        "url": "ne_50m_admin_1_states_provinces.json",
+        "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/ne_50m_admin_1_states_provinces.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_admin_1_states_provinces"
@@ -33,8 +33,8 @@
           "mark": {
             "type": "geoshape",
             "fill": "lightgray",
-            "stroke": "white",
-            "strokeWidth": 1
+            "stroke": "black",
+            "strokeWidth": 2
           }
         },
         {
@@ -43,7 +43,7 @@
               "lookup": "properties.name",
               "from": {
                 "data": {
-                  "url": "generalized_cost_of_living.csv"
+                  "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/generalized_cost_of_living.csv"
                 },
                 "key": "State",
                 "fields": ["Generalized_Cost_of_Living"]
@@ -51,7 +51,9 @@
             }
           ],
           "mark": {
-            "type": "geoshape"
+            "type": "geoshape",
+            "stroke": "black",
+            "strokeWidth": 2
           },
           "encoding": {
             "color": {
