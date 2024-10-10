@@ -18,80 +18,92 @@
 
   <script type="text/javascript">
     const spec = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": 800,
-      "height": 600,
-      "autosize": {
-        "type": "fit",
-        "contains": "padding"
-      },
-      "title": "Home Buyer Loan Commitments Across Australian States",
-      "data": {
-        "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/ne_50m_admin_1_states_provinces.json",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_50m_admin_1_states_provinces"
-        }
-      },
-      "layer": [
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Home Buyer Loan Commitments Across Australian States",
+  "width": 800,
+  "height": 600,
+  "params": [
+    {
+      "name": "Month_selection",
+      "value": "Jan-07",  
+      "bind": {
+        "input": "select",
+        "options": [
+          "Aug-06", "Sep-06", "Oct-06", "Nov-06", "Dec-06", 
+          "Jan-07", "Feb-07", "Mar-07", "Apr-07", "May-07",
+          "Jun-07", "Jul-07", "Aug-07", "Sep-07", "Oct-07",
+          "Nov-07", "Dec-07", "Jan-08", "Feb-08", "Mar-08",
+          "Apr-08", "May-08", "Jun-08", "Jul-08", "Aug-08",
+          "Sep-08", "Oct-08", "Nov-08", "Dec-08", "Jan-09",
+          "Feb-09", "Mar-09"
+        ],
+        "name": "Select Month: "
+      }
+    }
+  ],
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+    "format": { "type": "csv" }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "black",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "transform": [
         {
-          "mark": {
-            "type": "geoshape",
-            "fill": "lightgray",
-            "stroke": "black",
-            "strokeWidth": 2
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/ne_50m_admin_1_states_provinces.json",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_50m_admin_1_states_provinces"
+              }
+            },
+            "key": "State",
+            "fields": ["Loan_Commitments"]
           }
         },
         {
-          "transform": [
-            {
-              "lookup": "properties.name",
-              "from": {
-                "data": {
-                  "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-                  "format": { "type": "csv" }
-                },
-                "key": "State",
-                "fields": ["Loan_Commitments", "Month"]
-              }
-            },
-            {
-              "filter": {
-                "field": "Month", "equal": "Jan-24"
-              }
-            },
-            {
-              "calculate": "datum.properties.name",
-              "as": "StateName"
-            }
-          ],
-          "mark": {
-            "type": "geoshape",
-            "stroke": "black",
-            "strokeWidth": 2
-          },
-          "encoding": {
-            "color": {
-              "field": "Loan_Commitments",
-              "type": "quantitative",
-              "scale": { "scheme": "reds" }
-            },
-            "tooltip": [
-              { "field": "StateName", "type": "nominal", "title": "State" },
-              {
-                "field": "Loan_Commitments",
-                "type": "quantitative",
-                "title": "Loan Commitments",
-                "format": ".2f"
-              }
-            ]
+          "filter": {
+            "field": "Month", "equal": {"param": "Month_selection"}
           }
         }
       ],
-      "projection": {
-        "type": "mercator"
+      "mark": {
+        "type": "geoshape",
+        "stroke": "black",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "Loan_Commitments",
+          "type": "quantitative",
+          "scale": { "scheme": "reds" }
+        },
+        "tooltip": [
+          { "field": "properties.name", "type": "nominal", "title": "State" },
+          {
+            "field": "Loan_Commitments",
+            "type": "quantitative",
+            "title": "Loan Commitments",
+            "format": ".2f"
+          }
+        ]
       }
-    };
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  }
+}
+
 
 
     vegaEmbed("#vis", spec).catch(console.error);
