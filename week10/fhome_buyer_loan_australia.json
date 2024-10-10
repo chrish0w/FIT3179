@@ -29,22 +29,14 @@
           "lookup": "properties.name",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/fhome_buyer_loan.csv",
-              "format": {"type": "csv"}
+              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+              "format": { "type": "csv" }
             },
             "key": "State",
-            "fields": ["Loan_Commitments", "Month"]
+            "fields": ["Loan_Commitments"]
           }
-        },
-        {
-          "filter": {
-            "field": "Month", "equal": "Jan-24"
-          }
-        },
-        {
-          "calculate": "datum.properties.name",
-          "as": "StateName"
         }
+
       ],
       "mark": {
         "type": "geoshape",
@@ -55,10 +47,10 @@
         "color": {
           "field": "Loan_Commitments",
           "type": "quantitative",
-          "scale": {"scheme": "reds"}
+          "scale": { "scheme": "reds" }
         },
         "tooltip": [
-          {"field": "StateName", "type": "nominal", "title": "State"},
+          { "field": "properties.name", "type": "nominal", "title": "State" },
           {
             "field": "Loan_Commitments",
             "type": "quantitative",
