@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Home Buyer Loan Commitments Visualization</title>
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <title>Loan Commitments Visualisations</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
-
 <body>
-  <h1>First Home Buyer Loan Commitments Across Australian States</h1>
 
-  <!-- Visualization container -->
-  <div id="vis"></div>
+  <h1>Loan Commitments Across Australian States</h1>
+
+  <!-- Section for Map -->
+  <h2>Loan Commitments Map</h2>
+  <div id="map"></div>
+
+  <!-- Section for Line Chart -->
+  <h2>Loan Commitments Over Time</h2>
+  <div id="line_chart"></div>
 
   <script type="text/javascript">
-    const spec = {
+    // Embed the Map visualisation
+    vegaEmbed('#map', {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Home Buyer Loan Commitments Across Australian States",
   "width": 800,
   "height": 600,
-  "params": [
-    {
-      "name": "Month_selection",
-      "value": "Jan-07",  
-      "bind": {
-        "input": "select",
-        "options": [
-          "Aug-06", "Sep-06", "Oct-06", "Nov-06", "Dec-06", 
-          "Jan-07", "Feb-07", "Mar-07", "Apr-07", "May-07",
-          "Jun-07", "Jul-07", "Aug-07", "Sep-07", "Oct-07",
-          "Nov-07", "Dec-07", "Jan-08", "Feb-08", "Mar-08",
-          "Apr-08", "May-08", "Jun-08", "Jul-08", "Aug-08",
-          "Sep-08", "Oct-08", "Nov-08", "Dec-08", "Jan-09",
-          "Feb-09", "Mar-09"
-        ],
-        "name": "Select Month: "
-      }
-    }
-  ],
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "title": "Home Buyer Loan Commitments Across Australian States",
   "data": {
-    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-    "format": { "type": "csv" }
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/ne_50m_admin_1_states_provinces.json",
+    "format": {
+      "type": "topojson",
+      "feature": "ne_50m_admin_1_states_provinces"
+    }
   },
   "layer": [
     {
@@ -60,21 +53,14 @@
           "lookup": "properties.name",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/ne_50m_admin_1_states_provinces.json",
-              "format": {
-                "type": "topojson",
-                "feature": "ne_50m_admin_1_states_provinces"
-              }
+              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+              "format": { "type": "csv" }
             },
             "key": "State",
             "fields": ["Loan_Commitments"]
           }
-        },
-        {
-          "filter": {
-            "field": "Month", "equal": {"param": "Month_selection"}
-          }
         }
+
       ],
       "mark": {
         "type": "geoshape",
@@ -103,11 +89,67 @@
     "type": "mercator"
   }
 }
+);
 
-
-
-    vegaEmbed("#vis", spec).catch(console.error);
+    // Embed the Line Chart visualisation
+    vegaEmbed('#line_chart', {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "title": "Loan Commitments Over Time (by State and Month)",
+      "width": 800,
+      "height": 400,
+      "data": {
+        "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+        "format": {"type": "csv"}
+      },
+      "params": [
+        {
+          "name": "state_selection",
+          "bind": {
+            "input": "select",
+            "options": [
+              "New South Wales", "Victoria", "Queensland", "Western Australia",
+              "South Australia", "Tasmania", "Northern Territory", "ACT"
+            ],
+            "name": "Select State: "
+          },
+          "value": "Western Australia"
+        }
+      ],
+      "transform": [
+        {
+          "filter": "datum.State == state_selection"
+        }
+      ],
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "field": "Month",
+          "type": "ordinal",
+          "title": "Month",
+          "axis": {
+            "labelAngle": -45,      
+            "labelOverlap": false,  
+            "tickCount": 12         
+          }
+        },
+        "y": {
+          "field": "Loan_Commitments",
+          "type": "quantitative",
+          "title": "Loan Commitments"
+        },
+        "color": {
+          "field": "State",
+          "type": "nominal",
+          "title": "State"
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Loan_Commitments", "type": "quantitative", "title": "Loan Commitments"},
+          {"field": "Month", "type": "ordinal", "title": "Month"}
+        ]
+      }
+    });
   </script>
-</body>
 
+</body>
 </html>

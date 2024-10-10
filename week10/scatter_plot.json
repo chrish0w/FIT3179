@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Scatter Plot of Loan Commitments",
+  "width": 800,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+    "format": { "type": "csv" }
+  },
+  "mark": "point",
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "temporal",
+      "title": "Month",
+      "axis": { "format": "%b-%y" }
+    },
+    "y": {
+      "field": "Loan_Commitments",
+      "type": "quantitative",
+      "title": "Loan Commitments"
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+    "tooltip": [
+      { "field": "State", "type": "nominal", "title": "State" },
+      { "field": "Month", "type": "temporal", "title": "Month" },
+      { "field": "Loan_Commitments", "type": "quantitative", "title": "Loan Commitments" }
+    ]
+  }
+}

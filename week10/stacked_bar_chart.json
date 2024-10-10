@@ -1,0 +1,35 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Stacked Loan Commitments by State and Month",
+  "width": 800,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+    "format": { "type": "csv" }
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "temporal",
+      "title": "Month",
+      "axis": { "format": "%b-%y" }
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "Loan_Commitments",
+      "type": "quantitative",
+      "title": "Total Loan Commitments"
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+    "tooltip": [
+      { "field": "State", "type": "nominal", "title": "State" },
+      { "field": "Month", "type": "temporal", "title": "Month" },
+      { "field": "Loan_Commitments", "type": "quantitative", "title": "Loan Commitments" }
+    ]
+  }
+}

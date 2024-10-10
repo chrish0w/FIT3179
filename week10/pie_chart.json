@@ -1,0 +1,31 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Loan Commitments by State",
+  "width": 300,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
+    "format": { "type": "csv" }
+  },
+  "mark": "arc",
+  "encoding": {
+    "theta": {
+      "aggregate": "sum",
+      "field": "Loan_Commitments",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "State",
+      "type": "nominal",
+      "legend": { "title": "State" }
+    },
+    "tooltip": [
+      { "field": "State", "type": "nominal", "title": "State" },
+      {
+        "field": "Loan_Commitments",
+        "type": "quantitative",
+        "title": "Total Loan Commitments"
+      }
+    ]
+  }
+}
