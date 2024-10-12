@@ -6,7 +6,11 @@
     "type": "fit",
     "contains": "padding"
   },
-  "title": "Generalized Cost of Living Index Across Australian States",
+  "title": {
+    "text": "Generalized Cost of Living Index Across Australian States",
+    "subtitle": "Values are dimensionless, scaled from 0 (lowest) to 1 (highest)",
+    "subtitleFontSize": 12
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/ne_50m_admin_1_states_provinces.json",
     "format": {
@@ -29,7 +33,7 @@
           "lookup": "properties.name",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/generalized_cost_of_living.csv"
+              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/generalized_cost_of_living.csv"
             },
             "key": "State",
             "fields": ["Generalized_Cost_of_Living"]
@@ -48,6 +52,10 @@
           "scale": {
             "scheme": "blues",
             "domain": [0, 1]
+          },
+          "legend": {
+            "title": "Generalized Cost of Living (0 to 1)",
+            "orient": "right"
           }
         },
         "tooltip": [
@@ -55,14 +63,28 @@
           {
             "field": "Generalized_Cost_of_Living",
             "type": "quantitative",
-            "title": "Generalized Cost of Living",
+            "title": "Generalized Cost of Living Index",
             "format": ".2f"
           }
         ]
+      }
+    },
+    {
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "value": null
+        }
       }
     }
   ],
   "projection": {
     "type": "mercator"
+  },
+  "config": {
+    "view": {"stroke": null},
+    "geoshape": {
+      "graticule": true  
+    }
   }
 }
