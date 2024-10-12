@@ -1,31 +1,28 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Loan Commitments by State",
-  "width": 300,
-  "height": 300,
+  "description": "CPI basket pie chart using 2023 footnote weights.",
   "data": {
-    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-    "format": { "type": "csv" }
+    "values": [
+      {"Group": "Food and non-alcoholic beverages", "Weight": 17.18},
+      {"Group": "Alcohol and tobacco", "Weight": 7.87},
+      {"Group": "Clothing and footwear", "Weight": 3.37},
+      {"Group": "Housing", "Weight": 22.24},
+      {"Group": "Furnishings, household equipment & services", "Weight": 8.94},
+      {"Group": "Health", "Weight": 6.25},
+      {"Group": "Transport", "Weight": 10.99},
+      {"Group": "Communication", "Weight": 2.31},
+      {"Group": "Recreation and culture", "Weight": 10.84},
+      {"Group": "Education", "Weight": 4.43},
+      {"Group": "Insurance and financial services", "Weight": 5.56}
+    ]
   },
   "mark": "arc",
   "encoding": {
-    "theta": {
-      "aggregate": "sum",
-      "field": "Loan_Commitments",
-      "type": "quantitative"
-    },
-    "color": {
-      "field": "State",
-      "type": "nominal",
-      "legend": { "title": "State" }
-    },
+    "theta": {"field": "Weight", "type": "quantitative"},
+    "color": {"field": "Group", "type": "nominal"},
     "tooltip": [
-      { "field": "State", "type": "nominal", "title": "State" },
-      {
-        "field": "Loan_Commitments",
-        "type": "quantitative",
-        "title": "Total Loan Commitments"
-      }
+      {"field": "Group", "type": "nominal"},
+      {"field": "Weight", "type": "quantitative"}
     ]
   }
 }

@@ -1,34 +1,79 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Loan Commitments over Time",
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/aggregated_by_year.csv",
+    "format": {"type": "csv"}
+  },
+  "title": "Loan Commitments Over Time by State",
   "width": 800,
   "height": 500,
-  "data": {
-    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-    "format": { "type": "csv" }
-  },
-  "mark": "line",
+  "transform": [
+    {
+      "filter": "datum.State != null && datum.State != '' && datum.State != 'undefined'" 
+    }
+  ],
   "encoding": {
     "x": {
-      "field": "Month",
-      "type": "temporal",
-      "title": "Month",
-      "axis": { "format": "%b-%y" }
-    },
-    "y": {
-      "field": "Loan_Commitments",
-      "type": "quantitative",
-      "title": "Loan Commitments"
+      "field": "Year",
+      "type": "ordinal",
+      "axis": {"title": "Year"}
     },
     "color": {
       "field": "State",
       "type": "nominal",
-      "title": "State"
+      "legend": {"title": "State"}
+    }
+  },
+  "layer": [
+    {
+      "encoding": {
+        "y": {
+          "field": "Loan_Commitments",
+          "type": "quantitative",
+          "axis": {"title": "Loan Commitments"}
+        }
+      },
+      "layer": [
+        {"mark": {"type": "line", "clip": true}},
+        {"transform": [{"filter": {"selection": "hover"}}], "mark": "point"}
+      ]
     },
-    "tooltip": [
-      { "field": "State", "type": "nominal", "title": "State" },
-      { "field": "Month", "type": "temporal", "title": "Month" },
-      { "field": "Loan_Commitments", "type": "quantitative", "title": "Loan Commitments" }
-    ]
-  }
+    {
+      "transform": [
+        {
+          "pivot": "State",
+          "value": "Loan_Commitments",
+          "groupby": ["Year"]
+        }
+      ],
+      "mark": {"type": "rule", "clip": true},
+      "encoding": {
+        "opacity": {
+          "condition": {"value": 0.3, "selection": "hover"},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Year", "type": "ordinal"},
+          {"field": "Australian Capital Territory", "type": "quantitative"},
+          {"field": "New South Wales", "type": "quantitative"},
+          {"field": "Northern Territory", "type": "quantitative"},
+          {"field": "Queensland", "type": "quantitative"},
+          {"field": "South Australia", "type": "quantitative"},
+          {"field": "Tasmania", "type": "quantitative"},
+          {"field": "Victoria", "type": "quantitative"},
+          {"field": "Western Australia", "type": "quantitative"}
+        ]
+      },
+      "selection": {
+        "hover": {
+          "type": "single",
+          "fields": ["Year"],
+          "nearest": true,
+          "on": "mouseover",
+          "empty": "none",
+          "clear": "mouseout"
+        }
+      }
+    }
+  ]
 }

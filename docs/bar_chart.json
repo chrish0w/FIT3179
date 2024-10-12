@@ -44,7 +44,8 @@
     "x": {
       "field": "State",
       "type": "nominal",
-      "axis": { "title": "State", "labelAngle": -45 }
+      "axis": { "title": "State", "labelAngle": -45 },
+      "sort": "-y"  
     },
     "y": {
       "aggregate": "sum",
@@ -55,7 +56,7 @@
     "color": {
       "field": "State",
       "type": "nominal",
-      "legend": { "title": "State" }
+      "legend": null  
     },
     "tooltip": [
       { "field": "State", "type": "nominal", "title": "State" },

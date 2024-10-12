@@ -6,7 +6,7 @@
     "type": "fit",
     "contains": "padding"
   },
-  "title": "Home Buyer Loan Commitments Across Australian States",
+  "title": "Generalized Cost of Living Index Across Australian States",
   "data": {
     "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/ne_50m_admin_1_states_provinces.json",
     "format": {
@@ -29,14 +29,12 @@
           "lookup": "properties.name",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-              "format": { "type": "csv" }
+              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/generalized_cost_of_living.csv"
             },
             "key": "State",
-            "fields": ["Loan_Commitments"]
+            "fields": ["Generalized_Cost_of_Living"]
           }
         }
-
       ],
       "mark": {
         "type": "geoshape",
@@ -45,16 +43,19 @@
       },
       "encoding": {
         "color": {
-          "field": "Loan_Commitments",
+          "field": "Generalized_Cost_of_Living",
           "type": "quantitative",
-          "scale": { "scheme": "reds" }
+          "scale": {
+            "scheme": "blues",
+            "domain": [0, 1]
+          }
         },
         "tooltip": [
-          { "field": "properties.name", "type": "nominal", "title": "State" },
+          {"field": "properties.name", "type": "nominal", "title": "State"},
           {
-            "field": "Loan_Commitments",
+            "field": "Generalized_Cost_of_Living",
             "type": "quantitative",
-            "title": "Loan Commitments",
+            "title": "Generalized Cost of Living",
             "format": ".2f"
           }
         ]

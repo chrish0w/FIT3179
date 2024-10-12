@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/new_fhome_buyer_loan.csv",
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/updated_loan_commitments_yyyy_mm.csv",
     "format": {"type": "csv"}
   },
   "params": [
@@ -29,15 +29,7 @@
       "width": 480,
       "mark": "area",
       "transform": [
-        {"filter": "datum.State == State_selection"},
-        {
-          "calculate": "datum.Month == 'Jan' ? '01' : datum.Month == 'Feb' ? '02' : datum.Month == 'Mar' ? '03' : datum.Month == 'Apr' ? '04' : datum.Month == 'May' ? '05' : datum.Month == 'Jun' ? '06' : datum.Month == 'Jul' ? '07' : datum.Month == 'Aug' ? '08' : datum.Month == 'Sep' ? '09' : datum.Month == 'Oct' ? '10' : datum.Month == 'Nov' ? '11' : datum.Month == 'Dec' ? '12' : '01'",
-          "as": "Month_Number"
-        },
-        {
-          "calculate": "toDate(datum.Year + '-' + datum.Month_Number + '-01')",
-          "as": "Date"
-        }
+        {"filter": "datum.State == State_selection"}
       ],
       "encoding": {
         "x": {
@@ -70,7 +62,7 @@
       ],
       "encoding": {
         "x": {
-          "field": "Year",
+          "field": "Date",
           "type": "temporal",
           "axis": {"title": "Year"}
         },
