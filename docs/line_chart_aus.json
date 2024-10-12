@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/aggregated_by_year_grouped.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "title": "Total Loan Commitments Across Australia Over Time",
+  "width": 800,
+  "height": 400,
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year"
+    },
+    "y": {
+      "field": "Loan_Commitments",
+      "type": "quantitative",
+      "title": "Total Loan Commitments"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "red",
+        "clip": true
+      }
+    },
+    {
+      "transform": [
+        {"filter": {"selection": "hover"}}
+      ],
+      "mark": "point"
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "clip": true
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {"value": 0.3, "selection": "hover"},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Year", "type": "quantitative"},
+          {"field": "Loan_Commitments", "type": "quantitative", "title": "Total Loan Commitments"}
+        ]
+      },
+      "selection": {
+        "hover": {
+          "type": "single",
+          "fields": ["Year"],
+          "nearest": true,
+          "on": "mouseover",
+          "empty": "none",
+          "clear": "mouseout"
+        }
+      }
+    }
+  ]
+}

@@ -11,15 +11,13 @@
     {
       "name": "year_selection",
       "bind": {
-        "input": "select",
-        "options": [
-          "2006", "2007", "2008", "2009", "2010", "2011", "2012", 
-          "2013", "2014", "2015", "2016", "2017", "2018", "2019", 
-          "2020", "2021", "2022", "2023", "2024"
-        ],
+        "input": "range",
+        "min": 2007,
+        "max": 2024,
+        "step": 1,
         "name": "Select Year: "
       },
-      "value": "2016"
+      "value": 2016
     },
     {
       "name": "month_selection",
@@ -37,6 +35,9 @@
   "transform": [
     {
       "filter": "(datum.Year == year_selection) && (datum.Month == month_selection)"
+    },
+    {
+      "filter": "(year_selection != 2024) || (month_selection != 'Sep' && month_selection != 'Oct' && month_selection != 'Nov' && month_selection != 'Dec')"
     }
   ],
   "mark": "bar",
