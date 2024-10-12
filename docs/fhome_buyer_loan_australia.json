@@ -6,7 +6,20 @@
     "type": "fit",
     "contains": "padding"
   },
-  "title": "Home Buyer Loan Commitments Across Australian States",
+  "title": {"text": {"signal": "'Home Buyer Loan Commitments (Year: ' + Year_selection"}},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2006,
+      "bind": {
+        "input": "range",
+        "min": 2006,
+        "max": 2024,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
   "data": {
     "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/ne_50m_admin_1_states_provinces.json",
     "format": {
@@ -14,6 +27,30 @@
       "feature": "ne_50m_admin_1_states_provinces"
     }
   },
+  "transform": [
+    {
+      "lookup": "properties.name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/aggregated_by_year.csv",
+          "format": {"type": "csv"}
+        },
+        "key": "State",
+        "fields": ["Loan_Commitments", "Year"]
+      }
+    },
+    {
+      "filter": "datum.Year == Year_selection"  
+    },
+    {
+      "joinaggregate": [{
+        "op": "sum", 
+        "field": "Loan_Commitments", 
+        "as": "Total_Loan_Commitments"
+      }],
+      "groupby": ["properties.name"]
+    }
+  ],
   "layer": [
     {
       "mark": {
@@ -21,23 +58,15 @@
         "fill": "lightgray",
         "stroke": "black",
         "strokeWidth": 2
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "properties.name", "type": "nominal", "title": "State"},
+          {"field": "Total_Loan_Commitments", "type": "quantitative", "title": "Loan Commitments"}
+        ]
       }
     },
     {
-      "transform": [
-        {
-          "lookup": "properties.name",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-              "format": { "type": "csv" }
-            },
-            "key": "State",
-            "fields": ["Loan_Commitments"]
-          }
-        }
-
-      ],
       "mark": {
         "type": "geoshape",
         "stroke": "black",
@@ -45,18 +74,13 @@
       },
       "encoding": {
         "color": {
-          "field": "Loan_Commitments",
+          "field": "Total_Loan_Commitments",
           "type": "quantitative",
           "scale": { "scheme": "reds" }
         },
         "tooltip": [
           { "field": "properties.name", "type": "nominal", "title": "State" },
-          {
-            "field": "Loan_Commitments",
-            "type": "quantitative",
-            "title": "Loan Commitments",
-            "format": ".2f"
-          }
+          { "field": "Total_Loan_Commitments", "type": "quantitative", "title": "Loan Commitments" }
         ]
       }
     }

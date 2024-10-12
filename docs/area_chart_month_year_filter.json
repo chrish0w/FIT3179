@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/new_fhome_buyer_loan.csv",
+    "format": {"type": "csv"}
+  },
+  "params": [
+    {
+      "name": "State_selection",
+      "value": "New South Wales",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Australian Capital Territory",
+          "New South Wales",
+          "Northern Territory",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia"
+        ],
+        "name": "Select State: "
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 480,
+      "mark": "area",
+      "transform": [
+        {"filter": "datum.State == State_selection"},
+        {
+          "calculate": "datum.Month == 'Jan' ? '01' : datum.Month == 'Feb' ? '02' : datum.Month == 'Mar' ? '03' : datum.Month == 'Apr' ? '04' : datum.Month == 'May' ? '05' : datum.Month == 'Jun' ? '06' : datum.Month == 'Jul' ? '07' : datum.Month == 'Aug' ? '08' : datum.Month == 'Sep' ? '09' : datum.Month == 'Oct' ? '10' : datum.Month == 'Nov' ? '11' : datum.Month == 'Dec' ? '12' : '01'",
+          "as": "Month_Number"
+        },
+        {
+          "calculate": "toDate(datum.Year + '-' + datum.Month_Number + '-01')",
+          "as": "Date"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "scale": {"domain": {"param": "brush"}},
+          "axis": {"title": "Date (Month-Year)"}
+        },
+        "y": {
+          "field": "Loan_Commitments",
+          "type": "quantitative",
+          "aggregate": "sum",
+          "axis": {"title": "Loan Commitments"}
+        },
+        "color": {"field": "State", "type": "nominal"}
+      }
+    },
+    {
+      "width": 480,
+      "height": 60,
+      "mark": "area",
+      "params": [
+        {
+          "name": "brush",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }
+      ],
+      "transform": [
+        {"filter": "datum.State == State_selection"}
+      ],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "axis": {"title": "Year"}
+        },
+        "y": {
+          "field": "Loan_Commitments",
+          "type": "quantitative",
+          "aggregate": "sum",
+          "axis": {"tickCount": 3, "grid": false}
+        },
+        "color": {"field": "State", "type": "nominal"}
+      }
+    }
+  ]
+}
