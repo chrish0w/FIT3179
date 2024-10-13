@@ -6,7 +6,7 @@
       "type": "csv"
     }
   },
-  "title": "Total Loan Commitments Across Australia Over Time",
+  "title": "National Housing Loan Activity Over Time",
   "width": 800,
   "height": 400,
   "encoding": {
@@ -18,7 +18,7 @@
     "y": {
       "field": "Loan_Commitments",
       "type": "quantitative",
-      "title": "Total Loan Commitments"
+      "title": "Total Number of Mortgage Approvals"
     }
   },
   "layer": [
@@ -47,7 +47,7 @@
         },
         "tooltip": [
           {"field": "Year", "type": "quantitative"},
-          {"field": "Loan_Commitments", "type": "quantitative", "title": "Total Loan Commitments"}
+          {"field": "Loan_Commitments", "type": "quantitative", "title": "Total Number of Mortgage Approvals"}
         ]
       },
       "selection": {

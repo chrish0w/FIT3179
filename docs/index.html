@@ -3,83 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Buyer Loan Commitments Visualisation</title>
+  <title>Cost of Living in Australia</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header, footer {
+      text-align: center;
+      width: 100%;
+      padding: 20px;
+      background-color: #2c3e50; /* Changed background color to match */
+    }
+
+    header h1 {
+      color: white; /* Title color updated to white */
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .content {
+      width: 80%;
+      max-width: 1000px;
+      text-align: left;
+      margin: 20px auto;
+    }
+
+    article {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    #generalized_map, #pie_chart, #area_chart, #bar_chart, #line_chart_state, #line_chart_aus {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    p, ul {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
 
   <header>
-    <h1>Home Buyer Loan Commitments Across Australian States</h1>
+    <h1>Cost of Living Across Australian States</h1>
   </header>
 
   <section class="content">
     <article>
       <h2>Introduction</h2>
       <p>
-        In recent years, the housing market in Australia has been a subject of intense public interest and policy debate. 
-        One of the major factors influencing the housing market is the rate of loan commitments made by home buyers across the country. 
-        Understanding where the largest loan commitments are made provides insights into regional housing demand, 
-        population growth, and economic trends. The following visualizations delve into the patterns of home buyer loan commitments 
-        across different Australian states and over time. We explore which states have the highest loan activity and how the landscape of housing loans has evolved throughout the year.
+        The cost of living in Australia varies across states, with different factors affecting the overall index, such as mortgage prices, rent, groceries, fuel, and electricity costs. To provide a comprehensive understanding of how these costs differ, the "Generalized Cost of Living Index" was created. This index normalizes the values across different categories to provide a composite score for each state.
+      </p>
+      <p>
+        The Generalized Cost of Living Index is calculated using the Min-Max Normalization method, which rescaled the values for each category (Mortgage, Rent, Groceries, Fuel, Electricity) to a range between 0 and 1. This makes the values comparable across the different categories, ensuring consistency.
+      </p>
+      <p>
+        Categories Used:
+        <br><strong>Mortgage:</strong> Median house prices in each state's capital city.
+        <br><strong>Rent:</strong> Average weekly rent for both units and houses in each city.
+        <br><strong>Groceries:</strong> Average cost of various grocery items (e.g., milk, eggs, chicken breast) for each city.
+        <br><strong>Fuel:</strong> Weekly fuel costs for each capital city.
+        <br><strong>Electricity:</strong> Quarterly electricity bills for each state.
+      </p>
+      <p>
+        The overall Generalized Cost of Living Index is derived by averaging the normalized values for each state across all categories.
       </p>
     </article>
 
     <article>
-      <h2>Map: Loan Commitments Across States</h2>
+      <h2>Map: Generalized Cost of Living Index</h2>
       <p>
-        The map below provides a geographical breakdown of loan commitments across Australia's states and territories. 
-        The darker the red, the higher the number of loan commitments in that state. The regional disparities 
-        in loan commitments are immediately apparent, with some states demonstrating much stronger activity in the housing market 
-        than others. Hover over each state to see specific loan commitment numbers, revealing that New South Wales and Victoria 
-        stand out as the most active regions, likely driven by their large population centers and robust housing markets.
-        This visual offers a snapshot of the distribution of home loan activities, underscoring the concentrated demand 
-        in these urban areas.
+        The map below represents the Generalized Cost of Living Index across Australian states. Darker colors indicate a higher cost of living, while lighter colors represent more affordable living conditions in those areas. Hover over each state to see the specific index values.
       </p>
-      <div id="map"></div>
+      <div id="generalized_map"></div>
     </article>
 
     <article>
-      <h2>Line Chart: Loan Commitments Over Time</h2>
+      <h2>Pie Chart: Cost of Living Categories</h2>
       <p>
-        The line chart below tracks the number of loan commitments over the course of the year. Each state shows its 
-        month-by-month loan commitment trends, providing a longitudinal view of how the housing market has evolved. 
-        You’ll notice that loan commitments tend to fluctuate in a seasonal manner, with peaks in certain months that may 
-        correspond with favorable economic conditions or housing policies. For example, we see significant spikes 
-        in loan commitments during mid-year months, potentially tied to the conclusion of fiscal periods or 
-        the announcement of government incentives for first-time homebuyers. Select a state in the tooltip to 
-        further explore these trends.
+        The pie chart below breaks down the different categories contributing to the Generalized Cost of Living Index. Each category—Mortgage, Rent, Groceries, Fuel, and Electricity—plays a significant role in determining the overall cost of living in each state. Explore how each category weighs into the composite score for each state.
       </p>
-      <div id="line_chart"></div>
+      <div id="pie_chart"></div>
+    </article>
+
+    <!-- New Section: Property, Loans, and Mortgage Data -->
+    <article>
+      <h2>Property, Loans, and Mortgages</h2>
+      <p>
+        One of the most significant components of the cost of living is property, which includes home prices, mortgage rates, and loans. Understanding loan commitments is crucial, as it reflects both economic activity and individual purchasing power in the housing market. The following visualizations provide insights into property value changes and loan commitments over time.
+      </p>
+    </article>
+
+    <article>
+      <h2>Suburban Property Value</h2>
+      <p>
+        The map below visualizes the median suburban property value across different Victorian suburbs from 2010 to 2020. Use the year slider to see how property values have changed over time in different suburbs.
+      </p>
+      <div id="chloropleth_map"></div>
+    </article>
+
+    <article>
+      <h2>Loan Commitments by State and Year</h2>
+      <p>
+        The chart below provides a visual breakdown of loan commitments across different Australian states over time. You can explore this area chart to zoom in and out to focus on a specific state's loan activities.
+      </p>
+      <div id="area_chart"></div>
     </article>
 
     <article>
       <h2>Bar Chart: Loan Commitments by State</h2>
       <p>
-        The bar chart below provides a clear comparison of total loan commitments for each state. This comparison 
-        highlights which states lead in housing loan commitments and which ones lag behind. Unsurprisingly, 
-        New South Wales and Victoria lead the way, reflective of their large populations and bustling real estate markets. 
-        Meanwhile, states like Tasmania and Northern Territory show relatively fewer commitments, consistent with 
-        their smaller population sizes and less aggressive real estate development. The bar chart allows us to make 
-        a direct comparison of the magnitude of loan commitments across Australia, presenting a clearer picture of the 
-        housing market's regional dynamics.
+        The bar chart further highlights the total loan commitments for each state, providing a clearer comparison of the loan activity across regions. Select the year and month to compare values.
       </p>
       <div id="bar_chart"></div>
     </article>
 
     <article>
-      <h2>Pie Chart: Proportion of Loan Commitments by State</h2>
+      <h2>State-Level Housing Loan Trends Over Time</h2>
       <p>
-        The pie chart below offers a proportional breakdown of loan commitments across Australia. Each slice represents 
-        a state’s contribution to the overall market for home loan commitments. New South Wales and Victoria dominate, 
-        making up the majority of commitments, followed by Queensland. Smaller slices, such as those representing 
-        Tasmania and the Northern Territory, remind us of the disparities in housing market activities between larger 
-        urban areas and more rural or remote regions. This proportional representation offers a holistic view of the 
-        Australian housing market and highlights the dominant players in this economic space.
+        The line chart below illustrates the housing loan trends for different Australian states over time, highlighting the overall economic trends related to housing and loans.
       </p>
-      <div id="pie_chart"></div>
+      <div id="line_chart_state"></div>
+    </article>
+
+    <article>
+      <h2>National Housing Loan Activity Over Time</h2>
+      <p>
+        The following line chart provides an overview of housing loan activity at the national level, showcasing the total number of mortgage approvals from 2007 onwards.
+      </p>
+      <div id="line_chart_aus"></div>
     </article>
 
   </section>
@@ -89,101 +157,56 @@
   </footer>
 
   <script type="text/javascript">
-    // Define the map specification directly
-    const mapSpec = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": 800,
-      "height": 600,
-      "autosize": {
-        "type": "fit",
-        "contains": "padding"
-      },
-      "title": "Home Buyer Loan Commitments Across Australian States",
-      "data": {
-        "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/ne_50m_admin_1_states_provinces.json",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_50m_admin_1_states_provinces"
-        }
-      },
-      "layer": [
-        {
-          "mark": {
-            "type": "geoshape",
-            "fill": "lightgray",
-            "stroke": "black",
-            "strokeWidth": 2
-          }
-        },
-        {
-          "transform": [
-            {
-              "lookup": "properties.name",
-              "from": {
-                "data": {
-                  "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/week10/fhome_buyer_loan.csv",
-                  "format": { "type": "csv" }
-                },
-                "key": "State",
-                "fields": ["Loan_Commitments"]
-              }
-            }
-          ],
-          "mark": {
-            "type": "geoshape",
-            "stroke": "black",
-            "strokeWidth": 2
-          },
-          "encoding": {
-            "color": {
-              "field": "Loan_Commitments",
-              "type": "quantitative",
-              "scale": { "scheme": "reds" }
-            },
-            "tooltip": [
-              { "field": "properties.name", "type": "nominal", "title": "State" },
-              {
-                "field": "Loan_Commitments",
-                "type": "quantitative",
-                "title": "Loan Commitments",
-                "format": ".2f"
-              }
-            ]
-          }
-        }
-      ],
-      "projection": {
-        "type": "mercator"
-      }
-    };
-
-    // Embed the map visualisation directly
-    vegaEmbed('#map', mapSpec)
+    // Embed the Generalized Cost of Living Map
+    vegaEmbed('#generalized_map', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/generalized_cost_of_living_australia.json')
       .then(function(result) {
         console.log("Map rendered successfully.");
       })
       .catch(console.error);
 
-    // Embed the line chart visualisation
-    vegaEmbed('#line_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/line_chart.json')
+    // Embed the Pie Chart for Cost of Living Categories
+    vegaEmbed('#pie_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/pie_chart.json')
       .then(function(result) {
-        console.log("Line chart rendered successfully.");
+        console.log("Pie chart rendered successfully.");
       })
       .catch(console.error);
 
-    // Embed the bar chart visualisation
+    // Embed the Chloropleth Map (Suburban Property Value)
+    vegaEmbed('#chloropleth_map', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/vic_property_topojson.json')
+      .then(function(result) {
+        console.log("Chloropleth map rendered successfully.");
+      })
+      .catch(console.error);
+
+    // Embed the Area Chart (Loan Commitments by State)
+    vegaEmbed('#area_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/area_chart_month_year_filter.json')
+      .then(function(result) {
+        console.log("Area chart rendered successfully.");
+      })
+      .catch(console.error);
+
+    // Embed the Bar Chart (Loan Commitments by State)
     vegaEmbed('#bar_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/bar_chart.json')
       .then(function(result) {
         console.log("Bar chart rendered successfully.");
       })
       .catch(console.error);
 
-    // Embed the pie chart visualisation
-    vegaEmbed('#pie_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/pie_chart.json')
+    // Embed the State-Level Line Chart (Housing Loan Trends)
+    vegaEmbed('#line_chart_state', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/line_chart_state.json')
       .then(function(result) {
-        console.log("Pie chart rendered successfully.");
+        console.log("State-level line chart rendered successfully.");
       })
       .catch(console.error);
+
+    // Embed the National-Level Line Chart (Housing Loan Activity)
+    vegaEmbed('#line_chart_aus', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/line_chart_aus.json')
+      .then(function(result)
+      {
+          console.log("National-level line chart rendered successfully.");
+        })
+      .catch(console.error);
+
   </script>
 </body>
 </html>

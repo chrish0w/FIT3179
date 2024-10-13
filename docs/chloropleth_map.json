@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Suburban Property Value (2010-2020)",
+  "width": 900,
+  "height": 600,
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2018,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2020,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [145, -37.95],
+    "scale": 30000
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/vic_property_topojson.json",
+        "format": {
+          "type": "topojson",
+          "feature": "VIC_LOCALITY_POLYGON_SHP"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "'No data available for ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f0f0",
+        "stroke": "#ccc",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "note"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/median_suburban_housing.csv"
+      },
+      "transform": [
+        {
+          "lookup": "locality",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/vic_property_topojson.json",
+              "format": {
+                "type": "topojson",
+                "feature": "VIC_LOCALITY_POLYGON_SHP"
+              }
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        },
+        {
+          "filter": "datum.year == Year_selection"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#333",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "price",
+          "type": "quantitative",
+          "scale": {
+            "domain": [300000, 2000000],
+            "scheme": "greens"
+          },
+          "legend": {
+            "format": ".2s",
+            "title": "House Prices"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "locality",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "price",
+            "type": "quantitative",
+            "title": "Median Price (AUD)",
+            "format": "$,.0f"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "title": {
+      "fontSize": 18,
+      "font": "Arial",
+      "color": "#4f4f4f"
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 14
+    }
+  }
+}

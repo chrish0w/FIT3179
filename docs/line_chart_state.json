@@ -4,7 +4,7 @@
     "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/aggregated_by_year.csv",
     "format": {"type": "csv"}
   },
-  "title": "Loan Commitments Over Time by State",
+  "title": "State-Level Housing Loan Trends Over Time",
   "width": 800,
   "height": 500,
   "transform": [
@@ -30,7 +30,7 @@
         "y": {
           "field": "Loan_Commitments",
           "type": "quantitative",
-          "axis": {"title": "Loan Commitments"}
+          "axis": {"title": "Total Housing Loans Issued"}
         }
       },
       "layer": [
