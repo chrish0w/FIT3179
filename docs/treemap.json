@@ -21,7 +21,7 @@
     "tooltip": true
   },
   "encoding": {
-    "x": {"field": "Weight", "type": "quantitative", "title": "CPI Index", "aggregate": "sum"},
+    "x": {"field": "Weight", "type": "quantitative", "title": "CPI Index (%)", "aggregate": "sum"},
     "y": {"field": "Group", "type": "nominal", "sort": "-x", "title": null},
     "color": {"field": "Group", "type": "nominal", "legend": {"title": "Group"}},
     "tooltip": [

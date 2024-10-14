@@ -46,7 +46,7 @@
       margin-bottom: 10px;
     }
 
-    #generalized_map, #pie_chart, #area_chart, #bar_chart, #line_chart_state, #line_chart_aus {
+    #generalized_map, #treemap, #area_chart, #bar_chart, #line_chart_state, #line_chart_aus {
       display: flex;
       justify-content: center;
       margin: 0 auto;
@@ -95,11 +95,11 @@
     </article>
 
     <article>
-      <h2>Pie Chart: Cost of Living Categories</h2>
+      <h2>Cost of Living Categories (Treemap)</h2>
       <p>
-        The pie chart below breaks down the different categories contributing to the Generalized Cost of Living Index. Each category—Mortgage, Rent, Groceries, Fuel, and Electricity—plays a significant role in determining the overall cost of living in each state. Explore how each category weighs into the composite score for each state.
+        The treemap below breaks down the different categories contributing to the Generalized Cost of Living Index. Each category—Mortgage, Rent, Groceries, Fuel, and Electricity—plays a significant role in determining the overall cost of living in each state. Explore how each category weighs into the composite score for each state.
       </p>
-      <div id="pie_chart"></div>
+      <div id="treemap"></div>
     </article>
 
     <!-- New Section: Property, Loans, and Mortgage Data -->
@@ -164,10 +164,10 @@
       })
       .catch(console.error);
 
-    // Embed the Pie Chart for Cost of Living Categories
-    vegaEmbed('#pie_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/pie_chart.json')
+    // Embed the Treemap for Cost of Living Categories
+    vegaEmbed('#treemap', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/treemap.json')
       .then(function(result) {
-        console.log("Pie chart rendered successfully.");
+        console.log("Treemap rendered successfully.");
       })
       .catch(console.error);
 
@@ -201,10 +201,9 @@
 
     // Embed the National-Level Line Chart (Housing Loan Activity)
     vegaEmbed('#line_chart_aus', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/line_chart_aus.json')
-      .then(function(result)
-      {
-          console.log("National-level line chart rendered successfully.");
-        })
+      .then(function(result) {
+        console.log("National-level line chart rendered successfully.");
+      })
       .catch(console.error);
 
   </script>
