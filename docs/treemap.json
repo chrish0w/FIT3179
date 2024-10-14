@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "CPI basket treemap using 2023 footnote weights.",
+  "data": {
+    "values": [
+      {"Group": "Food and non-alcoholic beverages", "Weight": 17.18},
+      {"Group": "Alcohol and tobacco", "Weight": 7.87},
+      {"Group": "Clothing and footwear", "Weight": 3.37},
+      {"Group": "Housing", "Weight": 22.24},
+      {"Group": "Furnishings", "Weight": 8.94},
+      {"Group": "Health", "Weight": 6.25},
+      {"Group": "Transport", "Weight": 10.99},
+      {"Group": "Communication", "Weight": 2.31},
+      {"Group": "Recreation and culture", "Weight": 10.84},
+      {"Group": "Education", "Weight": 4.43},
+      {"Group": "Insurance and financial services", "Weight": 5.56}
+    ]
+  },
+  "mark": {
+    "type": "rect",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {"field": "Weight", "type": "quantitative", "title": "CPI Index", "aggregate": "sum"},
+    "y": {"field": "Group", "type": "nominal", "sort": "-x", "title": null},
+    "color": {"field": "Group", "type": "nominal", "legend": {"title": "Group"}},
+    "tooltip": [
+      {"field": "Group", "type": "nominal", "title": "Group"},
+      {"field": "Weight", "type": "quantitative", "title": "Weight (%)"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": false}
+  }
+}
