@@ -22,11 +22,11 @@
       text-align: center;
       width: 100%;
       padding: 20px;
-      background-color: #2c3e50; /* Changed background color to match */
+      background-color: #2c3e50;
     }
 
     header h1 {
-      color: white; /* Title color updated to white */
+      color: white;
       font-size: 2rem;
       margin: 0;
     }
@@ -46,7 +46,7 @@
       margin-bottom: 10px;
     }
 
-    #generalized_map, #treemap, #area_chart, #bar_chart, #line_chart_state, #line_chart_aus {
+    #generalized_map, #treemap, #heatmap, #area_chart, #bar_chart, #line_chart_state, #line_chart_aus {
       display: flex;
       justify-content: center;
       margin: 0 auto;
@@ -99,10 +99,9 @@
       <p>
         The bar chart below breaks down the different categories contributing to the Generalized Cost of Living Index. Each category—Food, Alcohol and tobacco, Housing, and others—plays a significant role in determining the overall cost of living in each state. This bar chart allows you to compare the weights of each category and see which factors contribute the most to the cost of living across Australia.
       </p>
-      <div id="treemap"></div> <!-- Using the same div ID for the bar chart -->
+      <div id="treemap"></div>
     </article>
     
-
     <!-- New Section: Property, Loans, and Mortgage Data -->
     <article>
       <h2>Property, Loans, and Mortgages</h2>
@@ -111,12 +110,13 @@
       </p>
     </article>
 
+    <!-- Replacing the chloropleth map with heatmap -->
     <article>
-      <h2>Suburban Property Value</h2>
+      <h2>Average Housing Prices by State</h2>
       <p>
-        The map below visualizes the median suburban property value across different Victorian suburbs from 2010 to 2020. Use the year slider to see how property values have changed over time in different suburbs.
+        The heatmap below visualizes the average housing prices across different Australian states from 2010 to 2020. The color intensity represents the variation in house prices, with darker colors indicating higher prices. Explore the heatmap to understand the property value trends over time.
       </p>
-      <div id="chloropleth_map"></div>
+      <div id="heatmap"></div>
     </article>
 
     <article>
@@ -172,10 +172,10 @@
       })
       .catch(console.error);
 
-    // Embed the Chloropleth Map (Suburban Property Value)
-    vegaEmbed('#chloropleth_map', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/chloropleth_map.json')
+    // Embed the Heatmap (Replacing the chloropleth map)
+    vegaEmbed('#heatmap', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/heatmap.json')
       .then(function(result) {
-        console.log("Chloropleth map rendered successfully.");
+        console.log("Heatmap rendered successfully.");
       })
       .catch(console.error);
 
@@ -210,3 +210,4 @@
   </script>
 </body>
 </html>
+
