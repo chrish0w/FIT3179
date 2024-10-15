@@ -1,0 +1,72 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Average Housing Prices Across States (2010-2020)",
+    "width": 600,
+    "height": 400,
+    "data": {
+      "url": "https://raw.githubusercontent.com/yourusername/repositoryname/main/average_housing_prices.csv",
+      "format": {"type": "csv"}
+    },
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2018,
+        "bind": {
+          "input": "range",
+          "min": 2010,
+          "max": 2020,
+          "step": 1,
+          "name": "Select Year: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "datum.Year == Year_selection"
+      }
+    ],
+    "mark": "rect",
+    "encoding": {
+      "x": {
+        "field": "State",
+        "type": "nominal",
+        "axis": {
+          "title": "State"
+        }
+      },
+      "y": {
+        "field": "Year",
+        "type": "ordinal",
+        "axis": {
+          "title": "Year"
+        }
+      },
+      "color": {
+        "field": "Price",
+        "type": "quantitative",
+        "scale": {
+          "scheme": "blues"
+        },
+        "legend": {
+          "title": "Average Price (AUD)"
+        }
+      },
+      "tooltip": [
+        {"field": "State", "type": "nominal", "title": "State"},
+        {"field": "Price", "type": "quantitative", "title": "Average Price (AUD)", "format": "$,.0f"},
+        {"field": "Year", "type": "ordinal", "title": "Year"}
+      ]
+    },
+    "config": {
+      "title": {
+        "fontSize": 18,
+        "font": "Arial",
+        "color": "#4f4f4f"
+      },
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14
+      }
+    }
+  }
+  
