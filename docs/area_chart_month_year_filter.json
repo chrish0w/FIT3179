@@ -1,4 +1,5 @@
 {
+  "title": "Loan Commitments Over Time by State",
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
     "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/updated_loan_commitments_yyyy_mm.csv",

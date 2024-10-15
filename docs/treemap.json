@@ -1,4 +1,5 @@
 {
+  "title": "Breakdown of Cost of Living Categories in Australia",
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 700, 
   "height": 400, 
