@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,8 @@
       align-items: center;
     }
 
-    header, footer {
+    header,
+    footer {
       text-align: center;
       width: 100%;
       padding: 20px;
@@ -32,8 +34,8 @@
     }
 
     .content {
-      width: 80%;
-      max-width: 1000px;
+      width: 85%;
+      max-width: 1200px; /* Increased content width */
       text-align: left;
       margin: 20px auto;
     }
@@ -46,18 +48,68 @@
       margin-bottom: 10px;
     }
 
-    #generalized_map, #treemap, #heatmap, #area_chart, #bar_chart, #line_chart_state, #line_chart_aus {
+    .graph-container {
+      width: 100%;
+      margin: 20px 0;
+      max-width: 100%; /* Ensures it doesn't overflow */
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    #generalized_map,
+    #treemap,
+    #heatmap,
+    #area_chart,
+    #bar_chart,
+    #line_chart_state,
+    #line_chart_aus {
       display: flex;
       justify-content: center;
       margin: 0 auto;
+      text-align: center;
+      width: 100%; /* Allows chart to fit within container */
     }
 
-    p, ul {
+    p,
+    ul {
       font-size: 1rem;
       line-height: 1.6;
     }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 70%;
+      height: 8px;
+      border-radius: 5px;
+      background: #2c3e50;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity .15s ease-in-out;
+    }
+
+    input[type=range]:hover {
+      opacity: 1;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    select:hover {
+      background-color: #ddd;
+    }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -68,45 +120,64 @@
     <article>
       <h2>Introduction</h2>
       <p>
-        The cost of living in Australia varies across states, with different factors affecting the overall index, such as mortgage prices, rent, groceries, fuel, and electricity costs. To provide a comprehensive understanding of how these costs differ, the "Generalized Cost of Living Index" was created. This index normalizes the values across different categories to provide a composite score for each state.
+        The cost of living in Australia varies across states, with different factors affecting the overall index, such
+        as mortgage prices, rent, groceries, fuel, and electricity costs. To provide a comprehensive understanding of
+        how these costs differ, the "Generalized Cost of Living Index" was created. This index normalizes the values
+        across different categories to provide a composite score for each state.
       </p>
       <p>
-        The Generalized Cost of Living Index is calculated using the Min-Max Normalization method, which rescaled the values for each category (Mortgage, Rent, Groceries, Fuel, Electricity) to a range between 0 and 1. This makes the values comparable across the different categories, ensuring consistency.
+        The Generalized Cost of Living Index is calculated using the Min-Max Normalization method, which rescaled the
+        values for each category (Mortgage, Rent, Groceries, Fuel, Electricity) to a range between 0 and 1. This makes
+        the values comparable across the different categories, ensuring consistency.
       </p>
       <p>
         Categories Used:
         <br><strong>Mortgage:</strong> Median house prices in each state's capital city.
         <br><strong>Rent:</strong> Average weekly rent for both units and houses in each city.
-        <br><strong>Groceries:</strong> Average cost of various grocery items (e.g., milk, eggs, chicken breast) for each city.
+        <br><strong>Groceries:</strong> Average cost of various grocery items (e.g., milk, eggs, chicken breast) for
+        each city.
         <br><strong>Fuel:</strong> Weekly fuel costs for each capital city.
         <br><strong>Electricity:</strong> Quarterly electricity bills for each state.
       </p>
       <p>
-        The overall Generalized Cost of Living Index is derived by averaging the normalized values for each state across all categories.
+        The overall Generalized Cost of Living Index is derived by averaging the normalized values for each state across
+        all categories.
       </p>
     </article>
 
     <article>
       <h2>Map: Generalized Cost of Living Index</h2>
       <p>
-        The map below represents the Generalized Cost of Living Index across Australian states. Darker colors indicate a higher cost of living, while lighter colors represent more affordable living conditions in those areas. Hover over each state to see the specific index values.
+        The map below represents the Generalized Cost of Living Index across Australian states. Darker colors indicate a
+        higher cost of living, while lighter colors represent more affordable living conditions in those areas. Hover
+        over each state to see the specific index values.
       </p>
-      <div id="generalized_map"></div>
+      <div class="graph-container">
+        <div id="generalized_map"></div>
+      </div>
     </article>
 
     <article>
       <h2>Cost of Living Categories (Bar Chart)</h2>
       <p>
-        The bar chart below breaks down the different categories contributing to the Generalized Cost of Living Index. Each category—Food, Alcohol and tobacco, Housing, and others—plays a significant role in determining the overall cost of living in each state. This bar chart allows you to compare the weights of each category and see which factors contribute the most to the cost of living across Australia.
+        The bar chart below breaks down the different categories contributing to the Generalized Cost of Living Index.
+        Each category—Food, Alcohol and tobacco, Housing, and others—plays a significant role in determining the overall
+        cost of living in each state. This bar chart allows you to compare the weights of each category and see which
+        factors contribute the most to the cost of living across Australia.
       </p>
-      <div id="treemap"></div>
+      <div class="graph-container">
+        <div id="treemap"></div>
+      </div>
     </article>
-    
+
     <!-- New Section: Property, Loans, and Mortgage Data -->
     <article>
       <h2>Property, Loans, and Mortgages</h2>
       <p>
-        One of the most significant components of the cost of living is property, which includes home prices, mortgage rates, and loans. Understanding loan commitments is crucial, as it reflects both economic activity and individual purchasing power in the housing market. The following visualizations provide insights into property value changes and loan commitments over time.
+        One of the most significant components of the cost of living is property, which includes home prices, mortgage
+        rates, and loans. Understanding loan commitments is crucial, as it reflects both economic activity and
+        individual purchasing power in the housing market. The following visualizations provide insights into property
+        value changes and loan commitments over time.
       </p>
     </article>
 
@@ -114,41 +185,57 @@
     <article>
       <h2>Average Housing Prices by State</h2>
       <p>
-        The heatmap below visualizes the average housing prices across different Australian states from 2010 to 2020. The color intensity represents the variation in house prices, with darker colors indicating higher prices. Explore the heatmap to understand the property value trends over time.
+        The heatmap below visualizes the average housing prices across different Australian states from 2010 to 2020.
+        The color intensity represents the variation in house prices, with darker colors indicating higher prices.
+        Explore the heatmap to understand the property value trends over time.
       </p>
-      <div id="heatmap"></div>
+      <div class="graph-container">
+        <div id="heatmap"></div>
+      </div>
     </article>
 
     <article>
       <h2>Loan Commitments by State and Year</h2>
       <p>
-        The chart below provides a visual breakdown of loan commitments across different Australian states over time. You can explore this area chart to zoom in and out to focus on a specific state's loan activities.
+        The chart below provides a visual breakdown of loan commitments across different Australian states over time.
+        You can explore this area chart to zoom in and out to focus on a specific state's loan activities.
       </p>
-      <div id="area_chart"></div>
+      <div class="graph-container">
+        <div id="area_chart"></div>
+      </div>
     </article>
 
     <article>
       <h2>Bar Chart: Loan Commitments by State</h2>
       <p>
-        The bar chart further highlights the total loan commitments for each state, providing a clearer comparison of the loan activity across regions. Select the year and month to compare values.
+        The bar chart further highlights the total loan commitments for each state, providing a clearer comparison of
+        the loan activity across regions. Select the year and month to compare values.
       </p>
-      <div id="bar_chart"></div>
+      <div class="graph-container">
+        <div id="bar_chart"></div>
+      </div>
     </article>
 
     <article>
       <h2>State-Level Housing Loan Trends Over Time</h2>
       <p>
-        The line chart below illustrates the housing loan trends for different Australian states over time, highlighting the overall economic trends related to housing and loans.
+        The line chart below illustrates the housing loan trends for different Australian states over time, highlighting
+        the overall economic trends related to housing and loans.
       </p>
-      <div id="line_chart_state"></div>
+      <div class="graph-container">
+        <div id="line_chart_state"></div>
+      </div>
     </article>
 
     <article>
       <h2>National Housing Loan Activity Over Time</h2>
       <p>
-        The following line chart provides an overview of housing loan activity at the national level, showcasing the total number of mortgage approvals from 2007 onwards.
+        The following line chart provides an overview of housing loan activity at the national level, showcasing the
+        total number of mortgage approvals from 2007 onwards.
       </p>
-      <div id="line_chart_aus"></div>
+      <div class="graph-container">
+        <div id="line_chart_aus"></div>
+      </div>
     </article>
 
   </section>
@@ -159,55 +246,55 @@
 
   <script type="text/javascript">
     // Embed the Generalized Cost of Living Map
-    vegaEmbed('#generalized_map', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/generalized_cost_of_living_australia.json')
-      .then(function(result) {
+    vegaEmbed('#generalized_map','https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/generalized_cost_of_living_australia.json')
+      .then(function (result) {
         console.log("Map rendered successfully.");
       })
       .catch(console.error);
 
     // Embed the Treemap for Cost of Living Categories
     vegaEmbed('#treemap', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/treemap.json')
-      .then(function(result) {
+      .then(function (result) {
         console.log("Treemap rendered successfully.");
       })
       .catch(console.error);
 
     // Embed the Heatmap (Replacing the chloropleth map)
     vegaEmbed('#heatmap', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/heatmap_average.json')
-      .then(function(result) {
+      .then(function (result) {
         console.log("Heatmap rendered successfully.");
       })
       .catch(console.error);
 
     // Embed the Area Chart (Loan Commitments by State)
     vegaEmbed('#area_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/area_chart_month_year_filter.json')
-      .then(function(result) {
+      .then(function (result) {
         console.log("Area chart rendered successfully.");
       })
       .catch(console.error);
 
     // Embed the Bar Chart (Loan Commitments by State)
     vegaEmbed('#bar_chart', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/bar_chart.json')
-      .then(function(result) {
+      .then(function (result) {
         console.log("Bar chart rendered successfully.");
       })
       .catch(console.error);
 
     // Embed the State-Level Line Chart (Housing Loan Trends)
     vegaEmbed('#line_chart_state', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/line_chart_state.json')
-      .then(function(result) {
+      .then(function (result) {
         console.log("State-level line chart rendered successfully.");
       })
       .catch(console.error);
 
     // Embed the National-Level Line Chart (Housing Loan Activity)
     vegaEmbed('#line_chart_aus', 'https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/line_chart_aus.json')
-      .then(function(result) {
+      .then(function (result) {
         console.log("National-level line chart rendered successfully.");
       })
       .catch(console.error);
 
   </script>
 </body>
-</html>
 
+</html>
