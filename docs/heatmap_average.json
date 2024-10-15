@@ -1,49 +1,51 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Average Housing Prices by State (2010-2020)",
-    "width": 700,
-    "height": 400,
-    "data": {
-      "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/average_housing_prices.csv",
-      "format": {"type": "csv"}
-    },
-    "mark": "rect",
-    "encoding": {
-      "x": {
-        "field": "Year",
-        "type": "ordinal",
-        "title": "Year"
-      },
-      "y": {
-        "field": "State",
-        "type": "nominal",
-        "title": "State"
-      },
-      "color": {
-        "field": "Price",
-        "type": "quantitative",
-        "title": "Average House Price (AUD)",
-        "scale": {
-          "scheme": "blues"
-        }
-      },
-      "tooltip": [
-        {"field": "State", "type": "nominal", "title": "State"},
-        {"field": "Year", "type": "ordinal", "title": "Year"},
-        {"field": "Price", "type": "quantitative", "title": "Average House Price (AUD)", "format": "$,.0f"}
-      ]
-    },
-    "config": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Average Housing Prices by State (2010-2020)",
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/chrish0w/FIT3179/refs/heads/main/docs/average_housing_prices.csv",
+    "format": {"type": "csv"}
+  },
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
       "axis": {
-        "labelFontSize": 12,
-        "titleFontSize": 14
-      },
-      "title": {
-        "fontSize": 18,
-        "anchor": "start",
-        "font": "Arial",
-        "color": "#4f4f4f"
+        "labelAngle": -45  
       }
+    },
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+    "color": {
+      "field": "Price",
+      "type": "quantitative",
+      "title": "Average House Price (AUD)",
+      "scale": {
+        "scheme": "blues"
+      }
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal", "title": "State"},
+      {"field": "Year", "type": "ordinal", "title": "Year"},
+      {"field": "Price", "type": "quantitative", "title": "Average House Price (AUD)", "format": "$,.0f"}
+    ]
+  },
+  "config": {
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 14
+    },
+    "title": {
+      "fontSize": 18,
+      "anchor": "start",
+      "font": "Arial",
+      "color": "#4f4f4f"
     }
   }
-  
+}

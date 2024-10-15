@@ -16,7 +16,10 @@
     "x": {
       "field": "Year",
       "type": "ordinal",
-      "axis": {"title": "Year"}
+      "axis": {
+        "title": "Year",
+        "labelAngle": -45  
+      }
     },
     "color": {
       "field": "State",
