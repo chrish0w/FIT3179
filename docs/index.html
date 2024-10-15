@@ -35,7 +35,7 @@
 
     .content {
       width: 85%;
-      max-width: 1200px; /* Increased content width */
+      max-width: 1200px;
       text-align: left;
       margin: 20px auto;
     }
@@ -51,7 +51,7 @@
     .graph-container {
       width: 100%;
       margin: 20px 0;
-      max-width: 100%; /* Ensures it doesn't overflow */
+      max-width: 100%;
       padding: 10px;
       box-sizing: border-box;
       border: 1px solid #ddd;
@@ -70,7 +70,7 @@
       justify-content: center;
       margin: 0 auto;
       text-align: center;
-      width: 100%; /* Allows chart to fit within container */
+      width: 100%;
     }
 
     p,
@@ -106,6 +106,39 @@
 
     select:hover {
       background-color: #ddd;
+    }
+
+    .references {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #2c3e50;
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      border-top: 1px solid #ddd;
+    }
+
+    .references h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .references ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .references li {
+      margin-bottom: 10px;
+    }
+
+    .references a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .references a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -148,100 +181,134 @@
     <article>
       <h2>Map: Generalized Cost of Living Index</h2>
       <p>
-        The map below represents the Generalized Cost of Living Index across Australian states. Darker colors indicate a
-        higher cost of living, while lighter colors represent more affordable living conditions in those areas. Hover
-        over each state to see the specific index values.
+        The map below displays the Generalized Cost of Living Index across Australian states. The darker shades indicate a higher cost of living, whereas lighter shades represent more affordable regions. This index captures multiple factors, including housing prices, rent, groceries, fuel, and utilities. As you explore the map, consider the geographical spread of high-cost regions—typically urban centers—and how rural areas tend to have lower costs.
+        <br><br>
+        States like New South Wales, with its urban concentration and competitive housing market, stand out as more expensive, while Tasmania shows more affordable living conditions. This distribution highlights the economic and housing disparities between urbanized and less populated states, where real estate, infrastructure, and access to essential goods play a pivotal role.
       </p>
       <div class="graph-container">
         <div id="generalized_map"></div>
       </div>
     </article>
-
+    
     <article>
       <h2>Cost of Living Categories (Bar Chart)</h2>
       <p>
-        The bar chart below breaks down the different categories contributing to the Generalized Cost of Living Index.
-        Each category—Food, Alcohol and tobacco, Housing, and others—plays a significant role in determining the overall
-        cost of living in each state. This bar chart allows you to compare the weights of each category and see which
-        factors contribute the most to the cost of living across Australia.
+        This bar chart breaks down the various factors contributing to the Generalized Cost of Living Index. Housing is by far the largest factor, followed by food and transport. This breakdown allows for a deeper understanding of which expenses have the greatest impact on the cost of living.
+        <br><br>
+        Housing expenses, especially in states like New South Wales and Victoria, take up a significant portion of living costs. These high housing costs reflect the property market trends, while food and transport costs provide insights into daily living expenses. Notably, the high cost of housing also drives up rent, further increasing the financial burden on residents.
       </p>
       <div class="graph-container">
         <div id="treemap"></div>
       </div>
     </article>
-
-    <!-- New Section: Property, Loans, and Mortgage Data -->
+    
     <article>
       <h2>Property, Loans, and Mortgages</h2>
       <p>
-        One of the most significant components of the cost of living is property, which includes home prices, mortgage
-        rates, and loans. Understanding loan commitments is crucial, as it reflects both economic activity and
-        individual purchasing power in the housing market. The following visualizations provide insights into property
-        value changes and loan commitments over time.
+        Property prices, loan commitments, and mortgage rates are crucial elements of the cost of living. This section provides insights into how property values have changed over time and how they differ across states. Loan commitments reflect both economic activity and individual purchasing power, which are influenced by property prices and interest rates.
+        <br><br>
+        The connection between rising property prices and increased loan commitments is clear—states with higher property values typically see more people taking out mortgages, further escalating living costs. The pressure on the housing market, especially in larger cities, contributes significantly to financial strain, making affordability a critical issue.
       </p>
     </article>
-
-    <!-- Replacing the chloropleth map with heatmap -->
+    
     <article>
       <h2>Average Housing Prices by State</h2>
       <p>
-        The heatmap below visualizes the average housing prices across different Australian states from 2010 to 2020.
-        The color intensity represents the variation in house prices, with darker colors indicating higher prices.
-        Explore the heatmap to understand the property value trends over time.
+        This heatmap visualizes the average housing prices across Australian states from 2010 to 2020. The darker shades indicate higher average prices. The chart shows how certain states, such as New South Wales and Victoria, have experienced substantial growth in property prices, driving up the cost of living in these regions.
+        <br><br>
+        The sharp rise in property prices, particularly in New South Wales, has led to significant affordability concerns. This trend is especially important to understand since higher property values also lead to larger mortgage payments, increasing the financial burden on homeowners and renters alike.
       </p>
       <div class="graph-container">
         <div id="heatmap"></div>
       </div>
     </article>
-
+    
     <article>
       <h2>Loan Commitments by State and Year</h2>
       <p>
-        The chart below provides a visual breakdown of loan commitments across different Australian states over time.
-        You can explore this area chart to zoom in and out to focus on a specific state's loan activities.
+        This area chart illustrates loan commitments across various Australian states over time. Peaks in loan commitments often align with property booms and government stimulus, while troughs may correspond to economic downturns or restrictive lending policies.
+        <br><br>
+        The surge in loan commitments around 2020-2021, driven by low interest rates and pandemic-related government policies, underscores the heightened demand for housing. However, these trends can exacerbate the affordability issue, as more people enter the market, pushing prices even higher.
       </p>
       <div class="graph-container">
         <div id="area_chart"></div>
       </div>
     </article>
-
+    
     <article>
       <h2>Bar Chart: Loan Commitments by State</h2>
       <p>
-        The bar chart further highlights the total loan commitments for each state, providing a clearer comparison of
-        the loan activity across regions. Select the year and month to compare values.
+        This bar chart shows the total loan commitments by state. The differences between states highlight the varying levels of housing market activity and economic conditions. For instance, states with more robust economies tend to see higher loan commitments, as more individuals seek financing for home purchases.
+        <br><br>
+        Victoria and New South Wales stand out, showing significantly higher loan commitments than other states. This pattern reflects their active housing markets, which not only attract home buyers but also fuel the demand for loans. In contrast, states with smaller populations and less competitive markets show fewer commitments.
       </p>
       <div class="graph-container">
         <div id="bar_chart"></div>
       </div>
     </article>
-
+    
     <article>
       <h2>State-Level Housing Loan Trends Over Time</h2>
       <p>
-        The line chart below illustrates the housing loan trends for different Australian states over time, highlighting
-        the overall economic trends related to housing and loans.
+        This line chart tracks housing loan trends across Australian states, providing insight into how housing finance has fluctuated over the years. Spikes in loan trends often reflect broader economic events, such as changes in interest rates, government policies, or shifts in housing supply and demand.
+        <br><br>
+        Notice the sharp rises around 2009 and 2020, which align with major economic shifts—the global financial crisis and pandemic-related policies, respectively. These events highlight how broader economic conditions influence housing markets and, in turn, living costs across the country.
       </p>
       <div class="graph-container">
         <div id="line_chart_state"></div>
       </div>
     </article>
-
+    
     <article>
       <h2>National Housing Loan Activity Over Time</h2>
       <p>
-        The following line chart provides an overview of housing loan activity at the national level, showcasing the
-        total number of mortgage approvals from 2007 onwards.
+        The following line chart shows national housing loan activity, offering a comprehensive view of mortgage approvals across Australia. Significant peaks in loan activity highlight periods of rapid housing market growth, while dips reflect broader economic slowdowns or tighter lending conditions.
+        <br><br>
+        The national trends often mirror state-specific fluctuations, but looking at the broader picture allows us to see how Australia’s housing market responds to global and national events. These trends help us predict future shifts in the housing market and how they might affect cost of living.
       </p>
       <div class="graph-container">
         <div id="line_chart_aus"></div>
       </div>
     </article>
 
+    <article>
+      <h2>Conclusion</h2>
+      <p>
+        The data presented across these visualizations highlights the complexities of the cost of living in Australia. From housing prices and loan commitments to everyday essentials like food and transport, each factor plays a critical role in shaping the financial landscape across different states. High population areas like New South Wales and Victoria face the greatest challenges, driven by skyrocketing housing costs and a competitive loan market, whereas smaller states and rural regions maintain relatively lower costs.
+        <br><br>
+        By examining these patterns over time, we gain a deeper understanding of how economic policies, interest rates, and property markets influence living standards. These insights help to anticipate future trends, allowing policymakers, businesses, and individuals to better navigate the evolving cost of living in Australia.
+      </p>
+    </article>
+    
+    
+
   </section>
 
   <footer>
     <p>Visualisation created for FIT3179 by Chris</p>
+
+    <div class="references">
+      <h3>References</h3>
+      <ul>
+        <li>
+          <a href="https://www.abs.gov.au/statistics/economy/finance/lending-indicators/latest-release" target="_blank">
+            Housing Loan Commitment: Australian Bureau of Statistics (Lending Indicators)
+          </a>
+        </li>
+        <li>
+          <a href="https://www.jacarandafinance.com.au/general/cost-of-living-comparison/#Cost-of-living-comparison-2024-House-prices-&-mortgages"
+            target="_blank">
+            Australian Cost of Living Index: Jacaranda Finance - Cost of Living Comparison 2024
+          </a>
+        </li>
+        <li>
+          <a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/total-value-dwellings/latest-release"
+            target="_blank">
+            Average Australian Housing Prices: Australian Bureau of Statistics (Total Value of Dwellings)
+          </a>
+        </li>
+      </ul>
+    </div>
   </footer>
 
   <script type="text/javascript">
